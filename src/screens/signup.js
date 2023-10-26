@@ -9,15 +9,10 @@ const Signup = ({ navigation }) => {
     const [isChecked, setIsChecked] = useState(false);
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{ flex: 1, marginHorizontal: 22 }}>
-                <View style={{ marginVertical: 22 }}>
-                    <Text style={styles.signup}>
-                        Signup to run errands
-                    </Text>
-
+                <View style={styles.subContainer}>
+                    <Text style={styles.signup}> Signup to run errands</Text>
                     <Text style={styles.createInfo}>Create your login info</Text>
                 </View>
-            </View>
         </SafeAreaView>
     )
 }
@@ -26,6 +21,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'COLORS.white',
     alignItems: 'center',
+  },
+  subContainer: {
+    flex: 1,
+    marginHorizontal: 22
   },
   signup: {
     fontSize: 22,
