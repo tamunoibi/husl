@@ -1,15 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Signup from './src/screens/signup';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Signup />
   );
 }
-
+/**
+ * Sign up to run errands
+Create your
+login info
+George Ademo|
+Phone number
+Email address
+Password
+ */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
