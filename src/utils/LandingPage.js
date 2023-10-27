@@ -11,6 +11,7 @@ import {
 import React from "react";
 import LandCard from "./LandCard";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const windowDimensions = Dimensions.get('window');
 const screenHeight = windowDimensions.height;
@@ -18,7 +19,11 @@ const screenHeight = windowDimensions.height;
 // Calculate the position for the LandCard based on a percentage of the screen height
 const landCardPosition = (screenHeight - 175) * 0.8;
 const LandingPage = () => {
+const navigation = useNavigation();
 
+const navigateToScreen = (screenName) => {
+  navigation.navigate('SignIn');
+};
   return (
     <ImageBackground
       source={require("../../assets/bground.png")}
@@ -58,7 +63,7 @@ const LandingPage = () => {
       </View>
 
       <View>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={navigateToScreen}>
           <View style={styles.centerContent}>
             <Text style={styles.btntxt}>LogIn</Text>
             <AntDesign name="arrowright" size={25} color="#000000" />
