@@ -1,9 +1,17 @@
-import { StyleSheet, Text, View, Image, Platform, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native';
-import React, { useState } from 'react';
-import { AntDesign, Entypo, Fontisto } from '@expo/vector-icons';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Platform,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
+import React, { useState } from "react";
+import { AntDesign, Entypo, Fontisto } from "@expo/vector-icons";
 import Input from "../components/Input";
 import { useNavigation } from "@react-navigation/native";
-
 
 const PostSignUp = () => {
   const navigation = useNavigation();
@@ -12,6 +20,7 @@ const PostSignUp = () => {
   const [phoneNumber, setPhoneNumber] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const handleFocus = (input) => {
     setFocusedInput(input);
@@ -20,20 +29,26 @@ const PostSignUp = () => {
   const handleBlur = () => {
     setFocusedInput(null);
   };
+  const handleSubmit = () => {
+    navigation.navigate("VerifyScreen");
+  };
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <View>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-      <AntDesign
-              name="leftcircleo"
-              size={29}
-              color="#000000"
-              //style={{ position: 'absolute', top: 65, left: 25}}
-            />
-            </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <AntDesign
+            name="leftcircleo"
+            size={29}
+            color="#000000"
+            //style={{ position: 'absolute', top: 65, left: 25}}
+          />
+        </TouchableOpacity>
       </View>
       <ScrollView>
         <Image
@@ -41,45 +56,66 @@ const PostSignUp = () => {
           resizeMode="contain"
           style={styles.img}
         />
-        <View style={{ position: "absolute", top: 95, alignSelf: "center" }}>
-          <Text style={{ color: "#73D158", fontSize: 18 }}>Sign up to post errands</Text>
+        <View style={{ position: "absolute", top: 65, alignSelf: "center" }}>
+          <Text style={{ color: "#73D158", fontSize: 18 }}>
+            Sign up to post errands
+          </Text>
         </View>
-        <View style={{ position: "absolute", top: 125, alignSelf: "center" }}>
+        <View style={{ position: "absolute", top: 105, alignSelf: "center" }}>
           <Text style={{ fontWeight: "400", fontSize: 40 }}>Create your</Text>
-          <Text style={{ fontWeight: "400", fontSize: 40, paddingLeft: 24 }}>login info</Text>
+          <Text style={{ fontWeight: "400", fontSize: 40, paddingLeft: 24 }}>
+            login info
+          </Text>
         </View>
         <View style={styles.inputContainer}>
           <View style={styles.inputRow}>
-            <AntDesign name="user" size={22} color="#000000" style={styles.icon} />
+            <AntDesign
+              name="user"
+              size={22}
+              color="#000000"
+              style={styles.icon}
+            />
             <Input
               placeholder="Full Name"
               value={fullName}
               onChange={(text) => setFullName(text)}
-              onFocus={() => handleFocus('fullName')}
+              onFocus={() => handleFocus("fullName")}
               onBlur={handleBlur}
-              style={focusedInput === 'fullName' ? styles.focusedInput : null}
+              style={focusedInput === "fullName" ? styles.focusedInput : null}
             />
           </View>
           <View style={styles.inputRow}>
-            <AntDesign name="phone" size={22} color="#000000" style={styles.icon} />
+            <AntDesign
+              name="phone"
+              size={22}
+              color="#000000"
+              style={styles.icon}
+            />
             <Input
               placeholder="Phone Number"
               value={phoneNumber}
               onChange={(text) => setPhoneNumber(text)}
-              onFocus={() => handleFocus('phoneNumber')}
+              onFocus={() => handleFocus("phoneNumber")}
               onBlur={handleBlur}
-              style={focusedInput === 'phoneNumber' ? styles.focusedInput : null}
+              style={
+                focusedInput === "phoneNumber" ? styles.focusedInput : null
+              }
             />
           </View>
           <View style={styles.inputRow}>
-            <Fontisto name="email" size={22} color="#000000" style={styles.icon} />
+            <Fontisto
+              name="email"
+              size={22}
+              color="#000000"
+              style={styles.icon}
+            />
             <Input
               placeholder="Email"
               value={email}
               onChange={(text) => setEmail(text)}
-              onFocus={() => handleFocus('email')}
+              onFocus={() => handleFocus("email")}
               onBlur={handleBlur}
-              style={focusedInput === 'email' ? styles.focusedInput : null}
+              style={focusedInput === "email" ? styles.focusedInput : null}
             />
           </View>
           <View style={styles.inputRow}>
@@ -87,16 +123,35 @@ const PostSignUp = () => {
             <Input
               placeholder="Password"
               value={password}
-              onChange={(text) => setPassword(text)}
-              onFocus={() => handleFocus('password')}
+              onChangeText={(text) => setPassword(text)}
+              onFocus={() => handleFocus("password")}
               onBlur={handleBlur}
-              style={focusedInput === 'password' ? styles.focusedInput : null}
+              style={focusedInput === "password" ? styles.focusedInput : null}
+              secureTextEntry={!isPasswordVisible}
             />
+            <TouchableOpacity
+              onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+              style={styles.icon}
+            >
+              {Platform.OS === "android" ? (
+                <Entypo
+                  name={isPasswordVisible ? "eye" : "eye-with-line"}
+                  size={22}
+                  color="#000000"
+                />
+              ) : (
+                <Entypo
+                  name={isPasswordVisible ? "eye" : "eye-with-line"}
+                  size={22}
+                  color="#000000"
+                />
+              )}
+            </TouchableOpacity>
           </View>
         </View>
 
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={() => handleSubmit()}>
             <View style={styles.centerContent}>
               <Text style={styles.btntxt}>SignUp</Text>
               <AntDesign name="arrowright" size={25} color="#FFFFFF" />
@@ -105,10 +160,10 @@ const PostSignUp = () => {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
-  )
-}
+  );
+};
 
-export default PostSignUp
+export default PostSignUp;
 
 const styles = StyleSheet.create({
   container: {
@@ -120,10 +175,10 @@ const styles = StyleSheet.create({
     padding: 12,
     justifyContent: "center",
     alignSelf: "center",
-    top: Platform.OS === "ios" ? 55 : 45,
+    top: Platform.OS === "ios" ? 5 : 10,
   },
   inputContainer: {
-    marginTop: 225,
+    marginTop: 195,
   },
   inputRow: {
     width: "95%",
@@ -133,7 +188,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: "#F8F8F8",
     paddingHorizontal: 5,
-    margin:12,
+    margin: 12,
     borderWidth: 0.5,
     borderRadius: 6,
     borderColor: "#000000",
@@ -156,7 +211,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "#000000",
     borderRadius: 6,
-
   },
   btntxt: {
     fontWeight: "600",
@@ -173,6 +227,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
     left: 25,
-    marginTop:Platform.OS === "ios" ?  46 : 36,
+    marginTop: Platform.OS === "ios" ? 46 : 36,
   },
 });
