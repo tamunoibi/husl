@@ -223,6 +223,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
     left: 25,
-    marginTop: Platform.OS === "ios" ? 26 : 36,
+    marginTop: Platform.OS === "ios" ? 25 : 36,
   },
 });
