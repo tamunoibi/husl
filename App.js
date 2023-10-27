@@ -1,26 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Signup from './src/screens/signup';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, LogBox} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import MainNavigations from "./src/navigations/MainNavigation";
+
+LogBox.ignoreAllLogs();
 
 export default function App() {
   return (
-    <Signup />
+    <NavigationContainer>
+      <StatusBar style="auto" />
+      <MainNavigations />
+    </NavigationContainer>
   );
 }
-/**
- * Sign up to run errands
-Create your
-login info
-George Ademo|
-Phone number
-Email address
-Password
- */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

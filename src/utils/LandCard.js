@@ -8,39 +8,54 @@ import {
   } from "react-native";
   import React,{useState} from 'react';
   import { FontAwesome,AntDesign } from "@expo/vector-icons";
+  import { useNavigation } from "@react-navigation/native";
 
 
   const { width } = Dimensions.get("window");
 
 const LandCard = () => {
-    const [data, setData] = useState([
-        {
-          id: "123",
-          title: "SignUp to run errands",
-        },
-        {
-          id: "456",
-          title: "SignUp to post errands",
-        },
-        // ... Add more items if needed
-      ]);
+  const navigation = useNavigation();
+
+    
+  const [data, setData] = useState([
+    {
+      id: '123',
+      title: 'SignUp to run errands',
+      screenName: 'SignUpErrand', // Screen name to navigate to
+    },
+    {
+      id: '456',
+      title: 'SignUp to post errands',
+      screenName: 'SignUpPostErrand', // Screen name to navigate to
+    },
+  ]);
+
+  const navigateToScreen = (screenName) => {
+    navigation.navigate(screenName);
+  };
+
   return (
     <View style={{flexDirection:"row"}}>
       
-        {data.map((item, index) => (
-          <View key={index} style={styles.cardContainer}>
-            <View style={styles.headerContainer}>
-              <Text style={styles.headerText}>{item.title}</Text>
-              <TouchableOpacity onPress={() => toggleVisibility(index)}>
-                
-              </TouchableOpacity>
-            </View>
-            
-            <View style={{position:"absolute", top:65, right:35}}>
-              <AntDesign name="rightcircleo" size={45} color="#FFFFFF"  style={{position:"absolute", top:5, right: -15}}/>  
-              </View>
+      {data.map((item, index) => (
+        <TouchableOpacity
+          key={index}
+          style={styles.cardContainer}
+          onPress={() => navigateToScreen(item.screenName)}
+        >
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>{item.title}</Text>
           </View>
-        ))}
+          <View style={{ position: 'absolute', top: 75, left: 45 }}>
+            <AntDesign
+              name="rightcircleo"
+              size={45}
+              color="#73D158"
+              style={{ position: 'absolute', top: 5, right: -15 }}
+            />
+          </View>
+        </TouchableOpacity>
+      ))}
     </View>
   )
 }
