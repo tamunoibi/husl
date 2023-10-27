@@ -5,14 +5,21 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  Dimensions,
+  Platform
 } from "react-native";
 import React from "react";
 import LandCard from "./LandCard";
 import { AntDesign } from "@expo/vector-icons";
 
+const windowDimensions = Dimensions.get('window');
+const screenHeight = windowDimensions.height;
+
+// Calculate the position for the LandCard based on a percentage of the screen height
+const landCardPosition = (screenHeight - 175) * 0.8;
 const LandingPage = () => {
+
   return (
-    // <View >
     <ImageBackground
       source={require("../../assets/bground.png")}
       style={styles.backgroundImage}
@@ -28,8 +35,9 @@ const LandingPage = () => {
           width: "auto",
           height: 124,
           position: "absolute",
-          top: 344,
+          top: Platform.OS === "ios" ? 325 : 285, // Conditionally set the top value
           left: 22,
+          //marginTop:65
         }}
       >
         <Text style={{ fontWeight: "400", fontSize: 56, color: "#FFFFFF" }}>
@@ -45,7 +53,7 @@ const LandingPage = () => {
         </View>
       </View>
 
-      <View style={{ position: "absolute", bottom: 185 }}>
+      <View style={{ position: "absolute", top: Platform.OS==="android"  ? landCardPosition - 20 : landCardPosition -50, alignSelf: "center" }}>
         <LandCard />
       </View>
 
@@ -57,15 +65,14 @@ const LandingPage = () => {
           </View>
         </TouchableOpacity>
 
-        <View style={{flexDirection:"row",gap:10,position:"absolute",top:772,alignSelf:"center"}}>
-          <Text style={{fontSize:13,color:"#FFFFFF"}}>Already registered?</Text>
+        <View style={{ flexDirection: "row", gap: 10, position: "absolute", top: Platform.OS === "ios" ? screenHeight -75 : screenHeight -35, alignSelf: "center" }}>
+          <Text style={{ fontSize: 13, color: "#FFFFFF" }}>Already registered?</Text>
           <TouchableOpacity>
-                 <Text style={{fontSize:14,color:"#FFFFFF"}} >LogIn</Text>
+            <Text style={{ fontSize: 14, color: "#FFFFFF" }}>LogIn</Text>
           </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
-    // </View>
   );
 };
 
@@ -77,14 +84,14 @@ const styles = StyleSheet.create({
     width: 81,
     padding: 12,
     position: "absolute",
-    top: 81,
+    top: 71,
     left: 25,
     gap: 6.01,
   },
   backgroundImage: {
-    width: "100%",
-    height: "100%",
-    //alignItems: "center",
+    flex: 1,
+   // width: "100%",
+   // height: "100%",
   },
   btn: {
     width: 342,
@@ -93,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#73D158",
     borderRadius: 6,
     position: "absolute",
-    top: 705,
+    top:Platform.OS ===  'ios' ? 690 :663,
   },
   btntxt: {
     fontWeight: "600",
@@ -106,170 +113,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  }, 
+  },
 });
 
-// import { StyleSheet, Text, View, ImageBackground, Image,TouchableOpacity } from "react-native";
-// import React from "react";
-// import LandCard from "./LandCard";
-// import { AntDesign } from '@expo/vector-icons';
 
-// const LandingPage = () => {
-//   return (
-//     // <View >
-//       <ImageBackground
-//         source={require("../../assets/bground.png")}
-//         style={styles.backgroundImage}
-//         resizeMode="cover"
-//       >
-//         <Image
-//           source={require("../../assets/huogo.png")}
-//           resizeMode="contain"
-//           style={styles.img}
-//         />
-//         <View
-//           style={{
-//             width: "auto",
-//             height: 124,
-//             position: "absolute",
-//             top: 344,
-//             left: 22,
-//           }}
-//         >
-//           <Text style={{ fontWeight: "400", fontSize: 56, color: "#FFFFFF" }}>
-//             Get it done
-//           </Text>
-//           <View style={{ flexDirection: "row", gap: 15 }}>
-//             <Text style={{ fontWeight: "400", fontSize: 56, color: "#FFFFFF" }}>
-//               on
-//             </Text>
-//             <Text style={{ fontWeight: "400", fontSize: 56, color: "#73D158" }}>
-//               Husl
-//             </Text>
-//           </View>
-//         </View>
 
-//         <View style={{position:"absolute",bottom:185}}>
-//           <LandCard />
-//         </View>
-
-//         <View>
-//         <TouchableOpacity style={styles.btn}>
-//   <View style={styles.centerContent}>
-//     <Text style={styles.btntxt}>LogIn</Text>
-//     <AntDesign name="arrowright" size={25} color="#000000" />
-//   </View>
-// </TouchableOpacity>
-
-//         </View>
-//       </ImageBackground>
-//     // </View>
-//   );
-// };
-
-// export default LandingPage;
-
-// const styles = StyleSheet.create({
-
-//   img: {
-//     height: 20,
-//     width: 81,
-//     padding: 12,
-//     position: "absolute",
-//     top: 81,
-//     left: 25,
-//     gap: 6.01,
-//   },
-//   backgroundImage: {
-//     width: "100%",
-//     height: "100%",
-//     //alignItems: "center",
-//   },
-//   btn:{
-//     width:342,
-//     height:59,
-//     alignSelf:"center",
-//      backgroundColor:"#73D158",
-//      borderRadius:6,
-//      position:"absolute",
-//      top:705,
-//   },
-//   btntxt:{
-//     fontWeight:"600",
-//     fontSize:22,
-//     alignSelf:"center",
-//     padding:5
-//   },
-//   centerContent: {
-//     flex: 1,
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-
-// });
-
-// import { StyleSheet, Text, View, ImageBackground, Image } from "react-native";
-// import React from "react";
-// import LandCard from "./LandCard";
-
-// const LandingPage = () => {
-//   return (
-//     <View style={styles.container}>
-//       <ImageBackground
-//         source={require("../../assets/bground.png")}
-//         style={styles.backgroundImage}
-//         resizeMode="cover"
-//       >
-//         <Image
-//           source={require("../../assets/huogo.png")}
-//           resizeMode="contain"
-//           style={styles.img}
-//         />
-//         <View
-//           style={{
-//             width: "auto",
-//             height: 124,
-//             position: "absolute",
-//             top: 344,
-//             left: 22,
-//           }}
-//         >
-//           <Text style={{ fontWeight: "400", fontSize: 56, color: "#FFFFFF" }}>
-//             Get it done
-//           </Text>
-//           <View style={{ flexDirection: "row", gap:15 }}>
-//             <Text style={{ fontWeight: "400", fontSize: 56, color: "#FFFFFF" }}>
-//               on
-//             </Text>
-//             <Text style={{ fontWeight: "400", fontSize: 56, color: "#73D158" }}>
-//               Husl
-//             </Text>
-//           </View>
-//         </View>
-
-//         <View style={{ backgroundColor: "#FFFFFF" }}>
-//           <LandCard />
-//         </View>
-//       </ImageBackground>
-//     </View>
-//   );
-// };
-
-// export default LandingPage;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#000000",
-//   },
-//   img: {
-//     height: 20,
-//     width: 81,
-//     padding: 12,
-//     position: "absolute",
-//     top: 81,
-//     left: 25,
-//     gap: 6.01,
-//   },
-// });
